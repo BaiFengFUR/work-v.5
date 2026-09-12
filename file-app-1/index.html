@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>看电影清单 - 研究1事件委托</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: sans-serif; max-width: 560px; margin: 24px auto; padding: 0 16px; }
+        .form-row input { padding: 6px; margin-right: 8px; }
+        #rating-input { width: 110px; }
+        .tip { color: #c00; font-size: 14px; min-height: 20px; }
+        .search { margin: 12px 0; }
+        .search input { padding: 6px; width: 220px; }
+        ul { list-style: none; padding: 0; }
+        li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .score { color: #e08000; font-weight: bold; margin-left: 12px; }
+        .del { margin-left: 12px; cursor: pointer; color: #c00; }
+    </style>
+</head>
+<body>
+    <h1>看电影清单 - 研究1：事件委托</h1>
+    <form id="add-form">
+        <div class="form-row">
+            <input type="text" id="title-input" placeholder="片名">
+            <input type="text" id="director-input" placeholder="导演">
+            <input type="text" id="rating-input" placeholder="评分(1-10)">
+            <button type="submit">添加</button>
+        </div>
+    </form>
+    <p class="tip" id="tip"></p>
+    <div class="search">
+        <input type="text" id="search-input" placeholder="按片名查询">
+    </div>
+    <ul id="movie-list"></ul>
+    <script src="app.js"></script>
+</body>
+</html>
