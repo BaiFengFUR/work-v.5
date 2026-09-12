@@ -1,4 +1,4 @@
-// 看电影清单 - 第二次提交：删除与查询
+// 看电影清单 - 第三次提交：localStorage本地保存（最终版）
 const form = document.querySelector('#add-form');
 const titleInput = document.querySelector('#title-input');
 const directorInput = document.querySelector('#director-input');
@@ -7,7 +7,10 @@ const tip = document.querySelector('#tip');
 const searchInput = document.querySelector('#search-input');
 const list = document.querySelector('#movie-list');
 
-let movies = [];
+// 页面加载时恢复存档；|| '[]' 保证首次访问没有存档时得到空数组而不是null报错
+let movies = JSON.parse(localStorage.getItem('movies') || '[]');
+const save = () => localStorage.setItem('movies', JSON.stringify(movies));
+
 let keyword = ''; // 查询关键字
 
 const render = () => {
@@ -36,6 +39,7 @@ const render = () => {
     del.textContent = '删除';
     del.addEventListener('click', () => {
       movies = movies.filter(m => m !== movie); // 先改数组
+      save();                                  // 保存删除后的数组
       render();                                // 再重新渲染
     });
 
@@ -66,6 +70,7 @@ form.addEventListener('submit', (e) => {
   }
 
   movies.push({ title: title, director: director, rating: rating });
+  save(); // 保存添加后的数组
   tip.textContent = '';
   titleInput.value = '';
   directorInput.value = '';
