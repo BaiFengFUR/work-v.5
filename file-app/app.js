@@ -1,23 +1,27 @@
-// 看电影清单 - 第一次提交：添加功能与统一渲染
-// 一条电影记录的结构：{ title: '片名', director: '导演', rating: 9 }
+// 看电影清单 - 第二次提交：删除与查询
 const form = document.querySelector('#add-form');
 const titleInput = document.querySelector('#title-input');
 const directorInput = document.querySelector('#director-input');
 const ratingInput = document.querySelector('#rating-input');
 const tip = document.querySelector('#tip');
+const searchInput = document.querySelector('#search-input');
 const list = document.querySelector('#movie-list');
 
 let movies = [];
+let keyword = ''; // 查询关键字
 
 const render = () => {
   list.innerHTML = '';
-  if (movies.length === 0) {
+  // 查询：只渲染片名包含关键字的电影
+  const shown = movies.filter(m => m.title.includes(keyword));
+
+  if (shown.length === 0) {
     const li = document.createElement('li');
-    li.textContent = '暂无电影';
+    li.textContent = '没有符合条件的电影';
     list.appendChild(li);
     return;
   }
-  movies.forEach(movie => {
+  shown.forEach(movie => {
     const li = document.createElement('li');
 
     const info = document.createElement('span');
@@ -27,8 +31,17 @@ const render = () => {
     score.className = 'score';
     score.textContent = movie.rating + '分';
 
+    const del = document.createElement('span');
+    del.className = 'del';
+    del.textContent = '删除';
+    del.addEventListener('click', () => {
+      movies = movies.filter(m => m !== movie); // 先改数组
+      render();                                // 再重新渲染
+    });
+
     li.appendChild(info);
     li.appendChild(score);
+    li.appendChild(del);
     list.appendChild(li);
   });
 };
@@ -57,6 +70,12 @@ form.addEventListener('submit', (e) => {
   titleInput.value = '';
   directorInput.value = '';
   ratingInput.value = '';
+  render();
+});
+
+// 输入即时查询
+searchInput.addEventListener('input', (e) => {
+  keyword = e.target.value.trim();
   render();
 });
 

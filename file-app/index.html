@@ -10,6 +10,8 @@
         .form-row input { padding: 6px; margin-right: 8px; }
         #rating-input { width: 110px; }
         .tip { color: #c00; font-size: 14px; min-height: 20px; }
+        .search { margin: 12px 0; }
+        .search input { padding: 6px; width: 220px; }
         ul { list-style: none; padding: 0; }
         li {
             padding: 8px 0;
@@ -18,7 +20,8 @@
             justify-content: space-between;
             align-items: center;
         }
-        .score { color: #e08000; font-weight: bold; }
+        .score { color: #e08000; font-weight: bold; margin-left: 12px; }
+        .del { margin-left: 12px; cursor: pointer; color: #c00; }
     </style>
 </head>
 <body>
@@ -32,6 +35,9 @@
         </div>
     </form>
     <p class="tip" id="tip"></p>
+    <div class="search">
+        <input type="text" id="search-input" placeholder="按片名查询">
+    </div>
     <ul id="movie-list"></ul>
     <script src="app.js"></script>
 </body>
